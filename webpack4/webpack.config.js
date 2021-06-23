@@ -1,19 +1,17 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-    entry: {
-        about: "./src/about.js",
-        contact: "./src/contact.js"
-    },
+    entry: './src/index.js',
     output: {
-        filename: "[name].bundle.js",
+        filename: "main.js",
         path: path.resolve(__dirname, "dist")
     },
     optimization: {
-      splitChunks: {
-          chunks: 'all'
-      }
+        minimizer: [new UglifyJsPlugin()]
     },
+    plugins: [new HtmlWebpackPlugin()],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         port: 9000
